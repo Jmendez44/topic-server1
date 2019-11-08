@@ -1,13 +1,36 @@
-const app = require('express')();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const express = require("express");
+const app = express();
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
+const mongoose = require("mongoose");
+const bcrypt = require('bcrypt')
+require("dotenv/config");
+const cors = require("cors");
 
 
+app.use(cors());
+app.use(express.json());
 
-io.on('connection', socket => {
-  console.log('a user connected');
+const topicsRoute = require("./routes/topics");
+app.use("/topics", topicsRoute);
+const userRoute = require("./routes/users");
+app.use("/users", userRoute);
+
+app.get("/", (req, res) => {
+  res.send("We are Home");
 });
 
-http.listen(4000, () => {
-  console.log('listening on *:4001');
+mongoose.connect(process.env.DB_CONNECTION, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+mongoose.connection.once("open", () => {
+  console.log("connected to db");
+});
+// io.on('connection', socket => {
+//   console.log('a user connected');
+// });
+
+app.listen(4000, () => {
+  console.log("listening on *:4000");
 });
