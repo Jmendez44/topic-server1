@@ -4,9 +4,10 @@ const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt')
-require("dotenv/config");
+require("dotenv").config();
 const cors = require("cors");
 
+console.log(process.env.DB_CONNECTION)
 
 app.use(cors());
 app.use(express.json());
