@@ -4,14 +4,15 @@ const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const mongoose = require("mongoose");
-const bcrypt = require('bcrypt')
-
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+const chalk = require("chalk");
 const cors = require("cors");
 
-console.log(process.env.DB_CONNECTION)
-
 app.use(cors());
+app.use(passport.initialize());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 const topicsRoute = require("./routes/topics");
 app.use("/topics", topicsRoute);
@@ -34,5 +35,5 @@ mongoose.connection.once("open", () => {
 // });
 
 app.listen(4000, () => {
-  console.log("listening on *:4000");
+  console.log(chalk.black.bgYellow("listening on *:4000"));
 });
