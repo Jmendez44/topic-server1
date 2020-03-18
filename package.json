@@ -23,5 +23,8 @@
     "passport-local": "^1.0.0",
     "passport-twitch.js": "0.0.7",
     "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "@architect/sandbox": "^1.7.3"
   }
 }
