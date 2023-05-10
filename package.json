@@ -25,6 +25,6 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "@architect/sandbox": "^1.7.3"
+    "@architect/sandbox": "^5.6.7"
   }
 }
